@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Clase persona.
@@ -14,6 +15,7 @@ public class Persona
     private int alturaCm;
     private int edad;
     private int caloriasIngeridas;
+    private ArrayList<Comida> arrayComidas;
 
     /**
      * Constructor de la clase persona
@@ -27,6 +29,7 @@ public class Persona
         this.alturaCm = alturaCm;
         this.edad = edad;
         caloriasIngeridas = 0;
+        arrayComidas = new ArrayList<>();
     }
 
     /**
@@ -41,6 +44,7 @@ public class Persona
         if (!sobrepasadoMetabolismoBasal()){
             caloriasIngeridas += nombreComida.getCalorias();
             haComido = nombreComida.getCalorias();
+            arrayComidas.add(nombreComida);
         }
         return haComido;
     }
@@ -95,5 +99,45 @@ public class Persona
         }
         System.out.println(respuesta);
         return respuesta;
+    }
+    
+    /**
+     * Metódo que devuelve la comida mas calorica consumida
+     *
+     * @param     ninguno
+     * @return    devuelve la comida mas calorica consumida
+     */
+    public String getAlimentoMasCaloricoConsumido()
+    {
+        String comidaMasCalorica = null;
+        ArrayList<Comida> copiaArrayComidas = new ArrayList<>(arrayComidas);
+        if (arrayComidas.size() > 0){
+            comidaMasCalorica = localizaMayorLoImprimeYLoBorra(copiaArrayComidas);
+        }
+        return comidaMasCalorica;
+    }
+    
+    /**
+     * A partir de un arraylist busca la comida ingerida mas calorica, la imprime y la borra
+     */
+    public String localizaMayorLoImprimeYLoBorra(ArrayList<Comida> coleccion)
+    {
+        String comidaMasCalorica = null;
+        int posicionComidaMasCalorica = -1;
+        int comidaReferencia = 0;
+
+        int posicion = 0;
+        for (Comida comida : coleccion){
+            if (comida.getCalorias() >= comidaReferencia){
+                comidaReferencia = comida.getCalorias();
+                comidaMasCalorica = comida.getNombre();
+                posicionComidaMasCalorica = posicion;
+            }
+            posicion++;
+        }
+
+        System.out.println(comidaMasCalorica);
+        coleccion.remove(posicionComidaMasCalorica);
+        return comidaMasCalorica;
     }
 }
