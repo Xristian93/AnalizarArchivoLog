@@ -22,6 +22,17 @@ public class Comida
     }
     
     /**
+     * Metódo que se utiliza para saber el nombre de la comida
+     *
+     * @param     ninguno
+     * @return    devuelve el nombre de la comida.
+     */
+    public String getNombre()
+    {
+        return nombre;
+    }
+    
+    /**
      * Metódo que se utiliza para saber las calorias
      *
      * @param     ninguno

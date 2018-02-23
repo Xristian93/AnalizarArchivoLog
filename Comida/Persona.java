@@ -38,9 +38,7 @@ public class Persona
     public int comer(Comida nombreComida)
     {
         int haComido = -1;
-        int metabolismoBasal = 0;
-        metabolismoBasal = (10 * pesoKg) + (6 * alturaCm) + (5 * edad) + 5;
-        if (caloriasIngeridas < metabolismoBasal){
+        if (!sobrepasadoMetabolismoBasal()){
             caloriasIngeridas += nombreComida.getCalorias();
             haComido = nombreComida.getCalorias();
         }
@@ -56,5 +54,46 @@ public class Persona
     public int getCaloriasIngeridas()
     {
         return caloriasIngeridas;
+    }
+    
+    /**
+     * Metódo que devuelve true si la persona ha sobrepasado su metabolismo basal y no si no lo ha hecho
+     *
+     * @param     ninguno
+     * @return    devuelve un booleano indicando si la persona sobrepasa el metabolismo basal
+     */
+    public boolean sobrepasadoMetabolismoBasal()
+    {
+        boolean haSobrepasadoMetabolismo = false;
+        int metabolismoBasal = 0; 
+        if (hombre){
+            metabolismoBasal = (10 * pesoKg) + (6 * alturaCm) + (5 * edad) + 5;
+        }
+        else{
+            metabolismoBasal = (10 * pesoKg) + (6 * alturaCm) + (5 * edad) - 161;
+        }
+        if (caloriasIngeridas > metabolismoBasal){
+            haSobrepasadoMetabolismo = true;
+        }
+        return haSobrepasadoMetabolismo;
+    }
+    
+    /**
+     * Metódo que contesta 
+     *
+     * @param     la pregunta a la persona
+     * @return    devuelve la respuesta de la persona
+     */
+    public String contestar(String pregunta)
+    {
+        String respuesta = "NO";
+        if (sobrepasadoMetabolismoBasal() || pregunta.contains(nombre)){
+            respuesta = pregunta.toUpperCase();
+            }
+        else if (!sobrepasadoMetabolismoBasal() && (pregunta.length() % 3) == 0){
+            respuesta = "SI";
+        }
+        System.out.println(respuesta);
+        return respuesta;
     }
 }
