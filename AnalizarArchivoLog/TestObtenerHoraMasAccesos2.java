@@ -9,12 +9,12 @@ import org.junit.Test;
  * @author  (your name)
  * @version (a version number or a date)
  */
-public class TestObtenerHoraMasAccesos
+public class TestObtenerHoraMasAccesos2
 {
     /**
      * Default constructor for test class TestObtenerHoraMasAccesos
      */
-    public TestObtenerHoraMasAccesos()
+    public TestObtenerHoraMasAccesos2()
     {
     }
 
@@ -39,12 +39,11 @@ public class TestObtenerHoraMasAccesos
     }
 
     @Test
-    public void testObtenerHoraMasAccesos()
+    public void testObtenerHoraMasAccesos2()
     {
         AnalizadorAccesosAServidor analizad1 = new AnalizadorAccesosAServidor();
-        assertEquals(-1, analizad1.obtenerHoraMasAccesos());        
-        analizad1.analizarArchivoDeLog("access.log");
-        assertEquals(4, analizad1.obtenerHoraMasAccesos());
+        analizad1.analizarArchivoDeLog("access02.log");
+        assertEquals(3, analizad1.obtenerHoraMasAccesos());
     }
 }
 
